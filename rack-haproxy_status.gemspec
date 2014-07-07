@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Rack::HaproxyStatus::VERSION
   spec.authors       = ["Marten Veldthuis"]
   spec.email         = ["marten@veldthuis.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{Tiny mountable app that returns an HTTP state based on contents of a file.}
+  spec.description   = %q{This app will return 503 if a config file contains "off", which will tell HAproxy to drop this node from the balancer backend.}
+  spec.homepage      = "https://github.com/roqua/rack-haproxy_status"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
