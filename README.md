@@ -1,6 +1,6 @@
 # Rack::HaproxyStatus
 
-TODO: Write a gem description
+HAproxy can automatically drop members out of a balancer pool if they return a 50x status code. This tiny mountable Rack app facilitates this.
 
 ## Installation
 
@@ -12,13 +12,19 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install rack-haproxy_status
-
 ## Usage
 
-TODO: Write usage instructions here
+If you're using Rails, you can add this line to your `config/routes.rb`:
+
+    mount Rack::HaproxyStatus::Endpoint.new(path: Rails.root.join('config/balancer_state')) => "/load_balancer_status"
+
+Then make sure that `config/balancer_state` contains either `on` or `off`. Anything else will raise an exception. In your HAproxy config, add this line under the backend:
+
+    option httpchk HEAD /load_balancer_status HTTP/1.1
+
+Or a slightly more advanced example where you set some additional headers:
+
+    option httpchk HEAD /load_balancer_status HTTP/1.1\r\nHost:\ www.myhost.com\r\nX-Forwarded-Proto:\ https
 
 ## Contributing
 
