@@ -7,7 +7,7 @@ module Rack
 
       VALID_STATES = %w(on off)
 
-      def initialize(path:, io: File)
+      def initialize(path:, io: ::File)
         @path = path
         @io = io
       end
